@@ -15,3 +15,11 @@ task("PriceConsumerV3:getLatestPrice", "getLatestPrice")
     const ba = await PriceConsumerV3.getLatestPrice()
     console.log("ETH/USD: ", ethers.utils.formatUnits(ba, "gwei"))
   });
+
+task("ChainLinkVRFDemo:requestRandomWords", "requestRandomWords")
+  .setAction(async function ({}, { ethers: { getNamedSigner } }, runSuper) {
+    const ChainLinkVRFDemo = await ethers.getContract("ChainLinkVRFDemo")
+
+    await (await ChainLinkVRFDemo.connect(await getNamedSigner("dev")).requestRandomWords()).wait()
+    console.log(111)
+  });
